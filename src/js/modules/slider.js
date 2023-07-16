@@ -15,7 +15,7 @@ export class Slider {
       this.slideIndex = this.slidesInSlider.length;
     }
 
-    this.slidesInSlider.forEach(slideInSlider => {
+    Array.from(this.slidesInSlider).forEach(slideInSlider => {
       slideInSlider.style.display = 'none';
     });
 
