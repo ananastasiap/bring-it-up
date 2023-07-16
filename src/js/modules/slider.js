@@ -27,13 +27,17 @@ export class Slider {
       } else {
         this.hanson.classList.remove('slideInUp');
       }
-    } catch(error){}
+    } catch(error){
+      console.error("Here's an error: ", error);
+    }
 
     Array.from(this.slidesInSlider).forEach(slideInSlider => {
       slideInSlider.style.display = 'none';
+      this.slidesInSlider[this.slideIndex - 1].classList.remove('fadeIn');
     });
 
     this.slidesInSlider[this.slideIndex - 1].style.display = 'block';
+    this.slidesInSlider[this.slideIndex - 1].classList.add('animated', 'fadeIn');
   }
 
   plusSlides(whereSliderMoves) {
@@ -43,7 +47,9 @@ export class Slider {
   render() {
     try {
       this.hanson = document.querySelector('.hanson');
-    } catch(error){}
+    } catch(error){
+      console.error("Here's an error: ", error);
+    }
 
     this.switchingButtons.forEach(switchingButton => {
       switchingButton.addEventListener('click', () => {
