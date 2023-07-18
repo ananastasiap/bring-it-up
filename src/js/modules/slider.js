@@ -15,20 +15,16 @@ export class Slider {
       this.slideIndex = this.slidesInSlider.length;
     }
 
-    try {
-      this.hanson.style.opacity = '0';
+    this.hanson.style.opacity = '0';
 
-      if (whereSliderMoves === 3) {
-        this.hanson.classList.add('animated');
-        setTimeout(() => {
-          this.hanson.style.opacity = '1';
-          this.hanson.classList.add('slideInUp');
-        }, 3000);
-      } else {
-        this.hanson.classList.remove('slideInUp');
-      }
-    } catch(error){
-      console.error("Here's an error: ", error);
+    if (whereSliderMoves === 3) {
+      this.hanson.classList.add('animated');
+      setTimeout(() => {
+        this.hanson.style.opacity = '1';
+        this.hanson.classList.add('slideInUp');
+      }, 3000);
+    } else {
+      this.hanson.classList.remove('slideInUp');
     }
 
     Array.from(this.slidesInSlider).forEach(slideInSlider => {
@@ -45,11 +41,7 @@ export class Slider {
   }
 
   render() {
-    try {
-      this.hanson = document.querySelector('.hanson');
-    } catch(error){
-      console.error("Here's an error: ", error);
-    }
+    this.hanson = document.querySelector('.hanson');
 
     this.switchingButtons.forEach(switchingButton => {
       switchingButton.addEventListener('click', () => {
