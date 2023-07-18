@@ -19,7 +19,6 @@ export class VideoPlayer {
   }
 
   bindCloseButton() {
-
     const closeVideo = () => {
       this.overlay.style.display = 'none';
       this.player.stopVideo();
@@ -34,8 +33,6 @@ export class VideoPlayer {
         closeVideo();
       }
     });
-
-    this.close.focus();
   }
 
   createPlayer(url) {
