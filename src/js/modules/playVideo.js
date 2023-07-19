@@ -14,6 +14,8 @@ export class VideoPlayer {
           const path = button.getAttribute('data-url');
           this.createPlayer(path);
         }
+
+        this.close.focus();
       });
     });
   }
