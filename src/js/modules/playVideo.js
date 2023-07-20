@@ -37,11 +37,11 @@ export class VideoPlayer {
     });
   }
 
-  createPlayer(url) {
+  createPlayer(videoId) {
     this.player = new YT.Player('frame', {
       height: '100%',
       width: '100%',
-      videoId: `${url}`,
+      videoId,
     });
 
     console.log(this.player);
