@@ -1,8 +1,8 @@
 import { Slider } from "./slider";
 
 export class MainSlider extends Slider {
-  constructor(page, switchingButtons) {
-    super(page, switchingButtons);
+  constructor(switchingButtons) {
+    super(switchingButtons);
   }
 
   showSlides(whereSliderMoves) {
