@@ -1,9 +1,8 @@
-export class Slider {
-  constructor(page, switchingButtons) {
-    this.page = document.querySelector(page);
-    this.slidesInSlider = this.page.children;
-    this.switchingButtons = document.querySelectorAll(switchingButtons);
-    this.slideIndex = 1;
+import { Slider } from "./slider";
+
+export class MainSlider extends Slider {
+  constructor(switchingButtons) {
+    super(switchingButtons);
   }
 
   showSlides(whereSliderMoves) {
