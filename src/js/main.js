@@ -1,4 +1,4 @@
-import { MainSlider, MiniSlider, VideoPlayer} from "./modules/index.js";
+import { MainSlider, MiniSlider, VideoPlayer, Difference} from "./modules/index.js";
 
 window.addEventListener('DOMContentLoaded', () => {
   const slider = new MainSlider({
@@ -36,4 +36,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const player = new VideoPlayer('.showup .play', '.overlay');
   player.init();
+
+  new Difference('.officerold', '.officernew', '.officer__card-item').init();
 });
