@@ -1,8 +1,9 @@
 import { Slider } from "./slider";
 
 export class MiniSlider extends Slider {
-  constructor(containerForSlider, nextButton, prevButton, activeClass, animate, autoplay) {
+  constructor(containerForSlider, nextButton, prevButton, activeClass, animate, autoplay, paused) {
     super(containerForSlider, nextButton, prevButton, activeClass, animate, autoplay);
+    this.paused = false;
   }
 
   decorizeSlides() {
@@ -51,6 +52,21 @@ export class MiniSlider extends Slider {
     });
   }
 
+  autoPlay() {
+    if (this.autoplay) {
+      this.paused = setInterval(() => this.nextSlide(), 5000);
+    }
+  }
+
+  stopAutoPlay() {
+    this.slidesInSlider[0].parentNode.addEventListener('mouseenter', () => {
+      clearInterval(this.paused);
+    });
+    this.slidesInSlider[0].parentNode.addEventListener('mouseleave', () => {
+      this.autoPlay();
+    });
+  }
+
   init() {
     this.containerForSlider.style.cssText = `
       display: flex;
@@ -61,9 +77,7 @@ export class MiniSlider extends Slider {
 
     this.bindTriggers();
     this.decorizeSlides();
-
-    if (this.autoplay) {
-      setInterval(() => this.nextSlide(), 5000);
-    }
+    this.stopAutoPlay();
+    this.autoPlay();
   }
 }
