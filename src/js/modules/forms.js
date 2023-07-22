@@ -7,11 +7,11 @@ export class Form {
       success: 'Thanks! We will contact you soon',
       failure: 'Something went wrong...',
     };
-    this.path = 'assets/question.php';
+    this.path = '../../assets/question.php';
   }
 
   clearInputs() {
-    this.clearInputs.forEach(item => {
+    this.inputs.forEach(item => {
       item.value = '';
     });
   }
@@ -29,34 +29,33 @@ export class Form {
   }
 
   initMask() {
+    let setCursorPosition = (position, element) => {
+        element.focus();
 
-    let setCursorPosition = (pos, elem) => {
-        elem.focus();
-
-        if (elem.setSelectionRange) {
-            elem.setSelectionRange(pos, pos);
-        } else if (elem.createTextRange) {
-            let range = elem.createTextRange();
+        if (element.setSelectionRange) {
+            element.setSelectionRange(position, position);
+        } else if (element.createTextRange) {
+            const range = element.createTextRange();
 
             range.collapse(true);
-            range.moveEnd('character', pos);
-            range.moveStart('character', pos);
+            range.moveEnd('character', position);
+            range.moveStart('character', position);
             range.select();
         }
     };
 
     function createMask(event) {
-        let matrix = '+1 (___) ___-____',
-            i = 0,
-            def = matrix.replace(/\D/g, ''),
-            val = this.value.replace(/\D/g, '');
+        const matrix = '+1 (___) ___-____';
+        let iterator = 0;
+        const def = matrix.replace(/\D/g, '');
+        let value = this.value.replace(/\D/g, '');
 
-        if (def.length >= val.length) {
-            val = def;
+        if (def.length >= value.length) {
+          value = def;
         }
 
-        this.value = matrix.replace(/./g, function(a) {
-            return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a;
+        this.value = matrix.replace(/./g, function(matrixSymbol) {
+            return /[_\d]/.test(matrixSymbol) && iterator < value.length ? value.charAt(iterator++) : iterator >= value.length ? '' : matrixSymbol;
         });
 
         if (event.type === 'blur') {
@@ -68,7 +67,7 @@ export class Form {
         }
     }
 
-    let inputs = document.querySelectorAll('[name="phone"]');
+    const inputs = document.querySelectorAll('[name="phone"]');
 
     inputs.forEach(input => {
         input.addEventListener('input', createMask);
