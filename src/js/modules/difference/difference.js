@@ -34,8 +34,5 @@ export class Difference {
     this.hideItems(this.newCards);
     this.bindTriggers(this.oldOfficer, this.oldCards, this.oldCounter);
     this.bindTriggers(this.newOfficer, this.newCards, this.newCounter);
-
-    this.hideItems();
-    this.bindTriggers();
   }
 }

@@ -7,7 +7,7 @@ export class Form {
       success: 'Thanks! We will contact you soon',
       failure: 'Something went wrong...',
     };
-    this.path = '../../assets/question.php';
+    this.path = 'https://simple-server-cumz.onrender.com/api/data';
   }
 
   clearInputs() {
