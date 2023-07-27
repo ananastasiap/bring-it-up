@@ -1,12 +1,14 @@
 export class Difference {
   constructor(oldOfficer, newOfficer, selectorsOfCard) {
-    this.oldOfficer = document.querySelector(oldOfficer);
-    this.newOfficer = document.querySelector(newOfficer);
-    this.oldCards = this.oldOfficer.querySelectorAll(selectorsOfCard);
-    this.newCards = this.newOfficer.querySelectorAll(selectorsOfCard);
-    this.oldCounter = 0;
-    this.newCounter = 0;
-    this.selectorsOfCard = selectorsOfCard;
+    try {
+      this.oldOfficer = document.querySelector(oldOfficer);
+      this.newOfficer = document.querySelector(newOfficer);
+      this.oldCards = this.oldOfficer.querySelectorAll(selectorsOfCard);
+      this.newCards = this.newOfficer.querySelectorAll(selectorsOfCard);
+      this.oldCounter = 0;
+      this.newCounter = 0;
+      this.selectorsOfCard = selectorsOfCard;
+    } catch(e){}
   }
 
   bindTriggers(officerContainer, cards, counter) {
@@ -30,9 +32,11 @@ export class Difference {
   }
 
   init() {
-    this.hideItems(this.oldCards);
-    this.hideItems(this.newCards);
-    this.bindTriggers(this.oldOfficer, this.oldCards, this.oldCounter);
-    this.bindTriggers(this.newOfficer, this.newCards, this.newCounter);
+    try {
+      this.hideItems(this.oldCards);
+      this.hideItems(this.newCards);
+      this.bindTriggers(this.oldOfficer, this.oldCards, this.oldCounter);
+      this.bindTriggers(this.newOfficer, this.newCards, this.newCounter);
+    } catch(e){}
   }
 }

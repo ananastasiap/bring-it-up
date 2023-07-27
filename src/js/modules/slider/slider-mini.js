@@ -68,16 +68,19 @@ export class MiniSlider extends Slider {
   }
 
   init() {
-    this.containerForSlider.style.cssText = `
-      display: flex;
-      flex-wrap: wrap;
-      overflow: hidden;
-      align-items: flex-start;
-    `;
+    try {
+      this.containerForSlider.style.cssText = `
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        align-items: flex-start;
+      `;
 
-    this.bindTriggers();
-    this.decorizeSlides();
-    this.stopAutoPlay();
-    this.autoPlay();
+      this.bindTriggers();
+      this.decorizeSlides();
+      this.stopAutoPlay();
+      this.autoPlay();
+
+    } catch(e){}
   }
 }
