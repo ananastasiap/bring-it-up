@@ -3,19 +3,38 @@ export class VideoPlayer {
     this.buttons = document.querySelectorAll(triggers);
     this.overlay = document.querySelector(overlay);
     this.close = this.overlay.querySelector('.close');
+    this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
   }
 
   bindTriggers() {
-    this.buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        if (document.querySelector('iframe#frame')) {
-          this.overlay.style.display = 'flex';
-        } else {
-          const path = button.getAttribute('data-url');
-          this.createPlayer(path);
-        }
+    this.buttons.forEach((button, index) => {
+      const closest = button.closest('.module__video-item');
+      if (closest) {
+        const blockedElement = closest.nextElementSibling;
 
-        this.close.focus();
+        if (index % 2 == 0) {
+          blockedElement.setAttribute('data-disabled', 'true');
+        }
+      }
+
+      button.addEventListener('click', () => {
+        if (!button.closest('.module__video-item') || button.closest('.module__video-item').getAttribute('data-disabled') !== 'true') {
+          this.activeButton = button;
+
+          if (document.querySelector('iframe#frame')) {
+            this.overlay.style.display = 'flex';
+            if (this.path !== button.getAttribute('data-url')) {
+              this.path = button.getAttribute('data-url');
+
+              this.player.loadVideoById({videoId:this.path});
+            }
+          } else {
+            this.path = button.getAttribute('data-url');
+            this.createPlayer(this.path);
+          }
+
+          this.close.focus();
+        }
       });
     });
   }
@@ -42,20 +61,45 @@ export class VideoPlayer {
       height: '100%',
       width: '100%',
       videoId,
+      events: {
+        'onStateChange': this.onPlayerStateChange,
+      }
     });
 
-    console.log(this.player);
     this.overlay.style.display = 'flex';
   }
 
+  onPlayerStateChange(state) {
+    try {
+      const blockedElement = this.activeButton.closest('.module__video-item').nextElementSibling;
+      const playButton = this.activeButton.querySelector('svg').cloneNode(true);
+
+      if (state.data === 0) {
+        if (blockedElement.querySelector('.play__circle').classList.contains('closed')) {
+          blockedElement.querySelector('.play__circle').classList.remove('closed');
+          blockedElement.querySelector('svg').remove();
+          blockedElement.querySelector('.play__circle').appendChild(playButton);
+          blockedElement.querySelector('.play__text').textContent = 'play video';
+          blockedElement.querySelector('.play__text').classList.remove('attention');
+          blockedElement.style.opacity = 1;
+          blockedElement.style.filter = 'none';
+
+          blockedElement.setAttribute('data-disabled', 'false');
+        }
+      }
+    } catch(e){}
+  }
+
   init() {
-    const tag = document.createElement('script');
+    if(this.buttons.length > 0) {
+      const tag = document.createElement('script');
 
-    tag.src = 'https://www.youtube.com/iframe_api';
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    this.bindTriggers();
-    this.bindCloseButton();
+      this.bindTriggers();
+      this.bindCloseButton();
+    }
   }
 }
