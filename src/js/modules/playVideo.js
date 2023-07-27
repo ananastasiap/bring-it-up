@@ -8,13 +8,14 @@ export class VideoPlayer {
 
   bindTriggers() {
     this.buttons.forEach((button, index) => {
-      try {
-        const blockedElement = button.closest('.module__video-item').nextElementSibling;
+      const closest = button.closest('.module__video-item');
+      if (closest) {
+        const blockedElement = closest.nextElementSibling;
 
         if (index % 2 == 0) {
           blockedElement.setAttribute('data-disabled', 'true');
         }
-      } catch(e){}
+      }
 
       button.addEventListener('click', () => {
         if (!button.closest('.module__video-item') || button.closest('.module__video-item').getAttribute('data-disabled') !== 'true') {
