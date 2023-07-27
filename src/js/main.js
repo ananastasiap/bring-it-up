@@ -1,4 +1,4 @@
-import { MainSlider, MiniSlider, VideoPlayer, Difference, Form} from "./modules/index.js";
+import { MainSlider, MiniSlider, VideoPlayer, Difference, Form, ShowInfo} from "./modules/index.js";
 
 window.addEventListener('DOMContentLoaded', () => {
   const slider = new MainSlider({
@@ -47,4 +47,6 @@ window.addEventListener('DOMContentLoaded', () => {
     slidesTriggerPrev: '.prevmodule'
   });
   modulePageSlider.render();
+
+  new ShowInfo('.plus__content').init();
 });
