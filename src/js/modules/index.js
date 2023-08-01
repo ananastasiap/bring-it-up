@@ -5,3 +5,4 @@ export { Difference } from './difference/difference.js';
 export { Form } from './forms.js';
 export { ShowInfo } from './showInfo.js';
 export { Download } from './download.js';
+export { ChangePage } from './changePage.js';

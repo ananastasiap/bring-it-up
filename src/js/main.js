@@ -1,4 +1,4 @@
-import { MainSlider, MiniSlider, VideoPlayer, Difference, Form, ShowInfo, Download} from "./modules/index.js";
+import { MainSlider, MiniSlider, VideoPlayer, Difference, Form, ShowInfo, Download, ChangePage} from "./modules/index.js";
 
 window.addEventListener('DOMContentLoaded', () => {
   const slider = new MainSlider({
@@ -50,4 +50,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   new ShowInfo('.plus__content').init();
   new Download('.download').init();
+  new ChangePage('.change-page', 'modules.html').init();
+  new ChangePage('.change-page--1', 'index.html').init();
 });
